@@ -36,11 +36,8 @@ class Friends extends React.Component {
                 <h1>Lambda Friends</h1>
                 {this.state.friends.map(x => (
                     <div key={x.id}>
-                        <h3>{x.name}</h3>
-                        <ul>
-                            <li>{x.age}</li>
-                            <li>{x.email}</li>
-                        </ul>
+                        <h3>{x.name} / {x.age}</h3>
+                        <p>{x.email}</p>
                     </div>
                 ))}
             </div>
