@@ -26,6 +26,11 @@ class Friends extends React.Component {
             })
     }
     render(){
+        if (this.state.friends.length === 0){
+            return ( 
+            <h1>Loading Lambda Friends...</h1>
+            )
+        }
         return (    
             <div>
                 <h1>Lambda Friends</h1>
@@ -45,3 +50,22 @@ class Friends extends React.Component {
 
 
 export default Friends;
+
+
+
+
+
+// componentDidMount(){
+//     axios
+//     .get('http://www.exampleapi.com/exampledata')
+//     .then(res => {
+//         this.setState({
+//             array: exampledata.data
+//         })
+//     })
+//     .catch(err => {
+//         this.setState({
+//             error: err
+//         })
+//     })
+// }
