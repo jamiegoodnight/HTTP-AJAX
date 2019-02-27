@@ -5,8 +5,8 @@ class Friends extends React.Component {
     constructor(){
         super();
         this.state={
-            friends=[],
-            error=''
+            friends:[],
+            error:''
         };
     }
     componentDidMount(){
@@ -28,9 +28,10 @@ class Friends extends React.Component {
     render(){
         return (    
             <div>
+                <h1>Lambda Friends</h1>
                 {this.state.friends.map(x => (
                     <div key={x.id}>
-                        <h3>x.name</h3>
+                        <h3>{x.name}</h3>
                         <ul>
                             <li>{x.age}</li>
                             <li>{x.email}</li>
