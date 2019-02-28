@@ -7,9 +7,9 @@ class Friends extends React.Component {
         this.state={
             friends:[],
             error:'',
-            friend: {
-                id: '',
+            friend: this.activeItem || {
                 name: '',
+                age: '',
                 email: ''
             }
         };
@@ -35,10 +35,44 @@ class Friends extends React.Component {
     handleChange = e => {
         this.setState({
             friend: {
+                ...this.state.friend,
                 [e.target.name]: e.target.value,
             }
         })
     }
+
+    addFriend = (e, friend) => {
+        e.preventDefault();
+        axios
+        .post("http://localhost:5000/friends", friend)
+        .then(res => {
+            this.setState({
+                friends: res.data
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    unFriend = (e, id) => {
+        e.preventDefault();
+        axios
+        .delete(`http://localhost:5000/friends/${id}`)
+        .then(res => {
+            this.setState({
+                friends: res.data
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
+    updateFriendForm
+    
+    updateFriend
+
 
     render(){
         if (this.state.friends.length === 0){
@@ -53,13 +87,13 @@ class Friends extends React.Component {
                     <div key={x.id}>
                         <h3>{x.name} / {x.age}</h3>
                         <p>{x.email}</p>
-                        <button>Edit Friend</button>
-                        <button>Delete Friend</button>
+                        <button onClick={e => updateFriendForm(e, item)}>Edit Friend</button>
+                        <button onClick={e => this.unFriend(e, x.id)}>Delete Friend</button>
                     </div>
                 ))}
                 <di>
                     <h3>Add a Lambda Friend</h3>
-                    <form>
+                    <form onSubmit={e => this.addFriend(e, this.state.friend)}>
                         <input 
                         type="string" 
                         name="name" 
@@ -69,11 +103,19 @@ class Friends extends React.Component {
                         />
                         <input 
                         type="string" 
+                        name="age" 
+                        value={this.state.friend.age}
+                        placeholder="age"
+                        onChange={this.handleChange}
+                        />
+                        <input 
+                        type="string" 
                         name="email" 
                         value={this.state.friend.email}
                         placeholder="email"
                         onChange={this.handleChange}
                         />
+                        <button>Add Your New Friend</button>
                     </form>
                 </di>
             </div>
