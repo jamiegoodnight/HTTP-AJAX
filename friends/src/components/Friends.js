@@ -6,9 +6,15 @@ class Friends extends React.Component {
         super();
         this.state={
             friends:[],
-            error:''
+            error:'',
+            friend: {
+                id: '',
+                name: '',
+                email: ''
+            }
         };
     }
+
     componentDidMount(){
         axios
             .get('http://localhost:5000/friends')
@@ -25,6 +31,15 @@ class Friends extends React.Component {
                 })
             })
     }
+
+    handleChange = e => {
+        this.setState({
+            friend: {
+                [e.target.name]: e.target.value,
+            }
+        })
+    }
+
     render(){
         if (this.state.friends.length === 0){
             return ( 
@@ -38,8 +53,29 @@ class Friends extends React.Component {
                     <div key={x.id}>
                         <h3>{x.name} / {x.age}</h3>
                         <p>{x.email}</p>
+                        <button>Edit Friend</button>
+                        <button>Delete Friend</button>
                     </div>
                 ))}
+                <di>
+                    <h3>Add a Lambda Friend</h3>
+                    <form>
+                        <input 
+                        type="string" 
+                        name="name" 
+                        value={this.state.friend.name}
+                        placeholder="name"
+                        onChange={this.handleChange}
+                        />
+                        <input 
+                        type="string" 
+                        name="email" 
+                        value={this.state.friend.email}
+                        placeholder="email"
+                        onChange={this.handleChange}
+                        />
+                    </form>
+                </di>
             </div>
         );
     }
@@ -66,3 +102,4 @@ export default Friends;
 //         })
 //     })
 // }
+
