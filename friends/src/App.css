@@ -31,3 +31,33 @@
     transform: rotate(360deg);
   }
 }
+
+h1 {
+  color: red;
+}
+
+.fade {
+  opacity: 4;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  }
+  .modal-backdrop.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  }
+  
+  .modal-backdrop.fade {
+  opacity: 0.1;
+  filter: alpha(opacity=0);
+  }
+  .modal-backdrop.fade.in {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  }
+
+  .display {
+    background-color: red;
+  }
